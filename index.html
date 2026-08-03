@@ -178,6 +178,29 @@
   .tech-card .tname{font-size:13.5px; font-weight:500;}
   .tech-card .tcat{font-size:11px; color:var(--muted-2); margin-top:4px; font-family:'JetBrains Mono',monospace;}
 
+  /* services — side scroll */
+  .scroll-fade{position:relative;}
+  .scroll-fade::after{
+    content:""; position:absolute; top:0; right:0; bottom:12px; width:64px; pointer-events:none;
+    background:linear-gradient(to right, transparent, var(--bg));
+  }
+  .services-scroll{
+    display:flex; gap:16px; overflow-x:auto; scroll-snap-type:x proximity; padding:4px 4px 16px 4px;
+    -webkit-overflow-scrolling:touch; scrollbar-width:thin; scrollbar-color:var(--line) transparent;
+  }
+  .services-scroll::-webkit-scrollbar{height:6px;}
+  .services-scroll::-webkit-scrollbar-thumb{background:var(--line); border-radius:99px;}
+  .services-scroll::-webkit-scrollbar-track{background:transparent;}
+  .service-card{
+    scroll-snap-align:start; flex:0 0 250px; border:1px solid var(--line); border-radius:12px;
+    padding:22px 20px; background:var(--panel); transition:transform .2s ease, border-color .2s ease, background .2s ease;
+  }
+  .service-card:hover{transform:translateY(-4px); border-color:rgba(255,122,69,.4); background:var(--panel-2);}
+  .service-card .sidx{font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--accent); margin-bottom:12px; letter-spacing:.04em;}
+  .service-card h3{font-size:15px; margin:0 0 8px; font-weight:600;}
+  .service-card p{font-size:13px; color:var(--muted); line-height:1.65; margin:0;}
+  .scroll-hint{font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--muted-2); margin:-24px 0 24px;}
+
   /* experience timeline */
   .timeline{position:relative; padding-left:32px; border-left:1px solid var(--line);}
   .tl-item{position:relative; padding-bottom:52px;}
@@ -385,30 +408,39 @@
       <h2>What I Do</h2>
     </div>
     <p class="section-sub reveal">Where I plug in on a campaign, end to end.</p>
-    <div class="tech-grid reveal" style="grid-template-columns:repeat(3,1fr);">
-      <div class="tech-card" style="text-align:left; padding:22px 20px;">
-        <div class="tname" style="font-size:15px; margin-bottom:8px;">Google &amp; Meta Ads Management</div>
-        <div class="tcat" style="font-family:'Inter',sans-serif; color:var(--muted); font-size:13px; text-transform:none; letter-spacing:0;">Search, Display, Remarketing and Meta campaigns — built, launched and optimized against CPL and ROAS targets.</div>
-      </div>
-      <div class="tech-card" style="text-align:left; padding:22px 20px;">
-        <div class="tname" style="font-size:15px; margin-bottom:8px;">Landing Pages &amp; CRO</div>
-        <div class="tcat" style="font-family:'Inter',sans-serif; color:var(--muted); font-size:13px; text-transform:none; letter-spacing:0;">Conversion‑focused landing pages, A/B tested to lift lead quality, not just traffic.</div>
-      </div>
-      <div class="tech-card" style="text-align:left; padding:22px 20px;">
-        <div class="tname" style="font-size:15px; margin-bottom:8px;">Analytics &amp; Tracking Setup</div>
-        <div class="tcat" style="font-family:'Inter',sans-serif; color:var(--muted); font-size:13px; text-transform:none; letter-spacing:0;">GA4, GTM, Meta Pixel and Conversion API implementation, so every lead is attributed correctly.</div>
-      </div>
-      <div class="tech-card" style="text-align:left; padding:22px 20px;">
-        <div class="tname" style="font-size:15px; margin-bottom:8px;">SEO</div>
-        <div class="tcat" style="font-family:'Inter',sans-serif; color:var(--muted); font-size:13px; text-transform:none; letter-spacing:0;">Technical and on‑page SEO, keyword research and competitor analysis to build organic pipeline alongside paid.</div>
-      </div>
-      <div class="tech-card" style="text-align:left; padding:22px 20px;">
-        <div class="tname" style="font-size:15px; margin-bottom:8px;">Audience &amp; Funnel Strategy</div>
-        <div class="tcat" style="font-family:'Inter',sans-serif; color:var(--muted); font-size:13px; text-transform:none; letter-spacing:0;">Segmentation and full‑funnel mapping so budget goes toward the audiences most likely to convert.</div>
-      </div>
-      <div class="tech-card" style="text-align:left; padding:22px 20px;">
-        <div class="tname" style="font-size:15px; margin-bottom:8px;">Reporting &amp; Dashboards</div>
-        <div class="tcat" style="font-family:'Inter',sans-serif; color:var(--muted); font-size:13px; text-transform:none; letter-spacing:0;">Looker Studio dashboards and KPI reports that make campaign performance easy for a client to act on.</div>
+    <p class="scroll-hint reveal">← scroll →</p>
+    <div class="scroll-fade reveal">
+      <div class="services-scroll">
+        <div class="service-card">
+          <div class="sidx">01</div>
+          <h3>Google &amp; Meta Ads Management</h3>
+          <p>Search, Display, Remarketing and Meta campaigns — built, launched and optimized against CPL and ROAS targets.</p>
+        </div>
+        <div class="service-card">
+          <div class="sidx">02</div>
+          <h3>Landing Pages &amp; CRO</h3>
+          <p>Conversion‑focused landing pages, A/B tested to lift lead quality, not just traffic.</p>
+        </div>
+        <div class="service-card">
+          <div class="sidx">03</div>
+          <h3>Analytics &amp; Tracking Setup</h3>
+          <p>GA4, GTM, Meta Pixel and Conversion API implementation, so every lead is attributed correctly.</p>
+        </div>
+        <div class="service-card">
+          <div class="sidx">04</div>
+          <h3>SEO</h3>
+          <p>Technical and on‑page SEO, keyword research and competitor analysis to build organic pipeline alongside paid.</p>
+        </div>
+        <div class="service-card">
+          <div class="sidx">05</div>
+          <h3>Audience &amp; Funnel Strategy</h3>
+          <p>Segmentation and full‑funnel mapping so budget goes toward the audiences most likely to convert.</p>
+        </div>
+        <div class="service-card">
+          <div class="sidx">06</div>
+          <h3>Reporting &amp; Dashboards</h3>
+          <p>Looker Studio dashboards and KPI reports that make campaign performance easy for a client to act on.</p>
+        </div>
       </div>
     </div>
   </section>
