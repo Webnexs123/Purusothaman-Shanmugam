@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Purusothaman Shanmugam — Performance Marketing Specialist</title>
+<meta name="description" content="Performance Marketing Specialist — Google Ads, Meta Ads, SEO & full-funnel growth across India, UK, US & Ghana.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#FFFFFF;
+    --btn-text:#14171F;
+    --panel:#F6F5F1;
+    --panel-2:#EFEDE7;
+    --line:#E4E1D8;
+    --fg:#14171F;
+    --muted:#5B6270;
+    --muted-2:#9297A2;
+    --accent:#FF7A45;
+    --accent-soft:rgba(255,122,69,.12);
+    --radius:14px;
+    --maxw:1080px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--ink);
+    color:var(--fg);
+    font-family:'Inter',system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.display{font-family:'Space Grotesk',sans-serif;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+  a{color:inherit;}
+  ::selection{background:var(--accent);color:#14171F;}
+
+  /* background texture */
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    background-image:
+      radial-gradient(circle at 12% 8%, rgba(255,122,69,.07), transparent 40%),
+      radial-gradient(circle at 85% 0%, rgba(255,122,69,.04), transparent 35%);
+    pointer-events:none;
+    z-index:0;
+  }
+
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 28px; position:relative; z-index:1;}
+
+  /* NAV */
+  header.nav{
+    position:fixed; top:0; left:0; right:0; z-index:50;
+    backdrop-filter:blur(10px);
+    background:rgba(255,255,255,.78);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:var(--maxw); margin:0 auto; padding:16px 28px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .brand{font-weight:600; letter-spacing:.02em; font-size:15px;}
+  .brand span{color:var(--accent);}
+  nav.links{display:flex; gap:28px; font-size:14px; color:var(--muted);}
+  nav.links a{text-decoration:none; position:relative; padding-bottom:3px; transition:color .2s;}
+  nav.links a:hover{color:var(--fg);}
+  nav.links a::after{
+    content:""; position:absolute; left:0; bottom:0; width:0; height:1px; background:var(--accent);
+    transition:width .25s ease;
+  }
+  nav.links a:hover::after{width:100%;}
+  .cta-btn{
+    font-family:'JetBrains Mono',monospace; font-size:12.5px; text-decoration:none;
+    color:var(--btn-text); background:var(--accent); padding:9px 16px; border-radius:999px;
+    letter-spacing:.02em; transition:transform .2s ease, box-shadow .2s ease;
+    white-space:nowrap;
+  }
+  .cta-btn:hover{transform:translateY(-2px); box-shadow:0 8px 24px -8px rgba(255,122,69,.6);}
+  .nav-mobile-hide{display:flex;}
+  @media(max-width:720px){ .nav-mobile-hide{display:none;} }
+
+  /* HERO */
+  .hero{
+    padding:168px 0 80px;
+    position:relative;
+  }
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace; font-size:12.5px; text-transform:uppercase;
+    letter-spacing:.14em; color:var(--accent); display:flex; align-items:center; gap:10px; margin-bottom:22px;
+  }
+  .eyebrow::before{content:""; width:8px; height:8px; border-radius:50%; background:var(--accent); box-shadow:0 0 0 4px var(--accent-soft);}
+  .hero h1{
+    font-size:clamp(34px, 6vw, 60px);
+    line-height:1.06; font-weight:700; margin:0 0 22px; max-width:780px; letter-spacing:-.01em;
+  }
+  .hero h1 em{font-style:normal; color:var(--accent);}
+  .hero p.lede{
+    font-size:17.5px; color:var(--muted); max-width:600px; line-height:1.65; margin:0 0 36px;
+  }
+  .hero-actions{display:flex; gap:14px; flex-wrap:wrap; margin-bottom:64px;}
+  .btn-primary{
+    background:var(--accent); color:var(--btn-text); text-decoration:none; padding:13px 24px;
+    border-radius:10px; font-weight:600; font-size:14.5px; transition:transform .2s, box-shadow .2s;
+  }
+  .btn-primary:hover{transform:translateY(-2px); box-shadow:0 10px 28px -10px rgba(255,122,69,.55);}
+  .btn-ghost{
+    border:1px solid var(--line); color:var(--fg); text-decoration:none; padding:13px 24px;
+    border-radius:10px; font-weight:500; font-size:14.5px; transition:border-color .2s, background .2s;
+  }
+  .btn-ghost:hover{border-color:var(--accent); background:rgba(255,122,69,.06);}
+
+  /* chart */
+  .chart-wrap{
+    position:relative; height:150px; margin-bottom:8px; border-top:1px solid var(--line);
+  }
+  .chart-wrap svg{position:absolute; top:-1px; left:0; width:100%; height:151px;}
+  #trendline{
+    stroke-dasharray:1000; stroke-dashoffset:1000;
+    animation:draw 2.2s cubic-bezier(.4,.1,.2,1) .3s forwards;
+  }
+  .chart-dot{opacity:0; animation:dotIn .5s ease forwards;}
+  @keyframes draw{ to{stroke-dashoffset:0;} }
+  @keyframes dotIn{ to{opacity:1;} }
+
+  /* stat readout */
+  .stats{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:0; border-top:1px solid var(--line);
+  }
+  .stat{padding:24px 4px 0; border-right:1px solid var(--line);}
+  .stat:last-child{border-right:none;}
+  .stat .num{
+    font-family:'JetBrains Mono',monospace; font-size:clamp(22px,3vw,30px); font-weight:600; color:var(--fg);
+    display:flex; align-items:baseline; gap:2px;
+  }
+  .stat .num .accent{color:var(--accent);}
+  .stat .label{font-size:12.5px; color:var(--muted-2); margin-top:6px; line-height:1.4;}
+  @media(max-width:640px){ .stats{grid-template-columns:repeat(2,1fr); row-gap:24px;} }
+
+  /* SECTION shared */
+  section{padding:88px 0; border-top:1px solid var(--line); position:relative;}
+  .section-head{display:flex; align-items:baseline; gap:16px; margin-bottom:44px; flex-wrap:wrap;}
+  .section-head .tag{
+    font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--muted-2); letter-spacing:.1em; text-transform:uppercase;
+  }
+  .section-head h2{font-size:clamp(24px,3.4vw,34px); margin:0; font-weight:600;}
+
+  .reveal{opacity:0; transform:translateY(22px); transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  /* about */
+  .about-grid{display:grid; grid-template-columns:1.1fr 1fr; gap:56px;}
+  @media(max-width:800px){ .about-grid{grid-template-columns:1fr;} }
+  .about-grid p{color:var(--muted); line-height:1.75; font-size:15.5px; margin:0 0 16px;}
+  .comp-group{margin-bottom:22px;}
+  .comp-group h4{
+    font-size:12px; text-transform:uppercase; letter-spacing:.1em; color:var(--muted-2);
+    font-family:'JetBrains Mono',monospace; margin:0 0 10px; font-weight:500;
+  }
+  .pills{display:flex; flex-wrap:wrap; gap:8px;}
+  .pill{
+    font-size:13px; padding:7px 13px; border:1px solid var(--line); border-radius:999px; color:var(--muted);
+    transition:border-color .2s, color .2s, background .2s;
+  }
+  .pill:hover{border-color:var(--accent); color:var(--fg); background:var(--accent-soft);}
+
+  /* experience timeline */
+  .timeline{position:relative; padding-left:32px; border-left:1px solid var(--line);}
+  .tl-item{position:relative; padding-bottom:52px;}
+  .tl-item:last-child{padding-bottom:0;}
+  .tl-dot{
+    position:absolute; left:-37.5px; top:4px; width:11px; height:11px; border-radius:50%;
+    background:var(--ink); border:2px solid var(--muted-2);
+  }
+  .tl-item.current .tl-dot{
+    border-color:var(--accent); background:var(--accent);
+    box-shadow:0 0 0 5px var(--accent-soft);
+    animation:pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes pulse{
+    0%,100%{box-shadow:0 0 0 5px var(--accent-soft);}
+    50%{box-shadow:0 0 0 9px transparent;}
+  }
+  .tl-date{
+    font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--accent); margin-bottom:6px; letter-spacing:.03em;
+  }
+  .tl-item.current .tl-date::after{content:"· current"; color:var(--muted-2);}
+  .tl-role{font-size:19px; font-weight:600; margin:0 0 2px;}
+  .tl-co{color:var(--muted); font-size:14px; margin:0 0 14px;}
+  .tl-bullets{margin:0; padding-left:18px; color:var(--muted); font-size:14.5px; line-height:1.75;}
+  .tl-bullets li{margin-bottom:6px;}
+  .tl-bullets .accent{color:var(--fg); font-family:'JetBrains Mono',monospace; font-weight:500;}
+
+  /* projects */
+  .proj-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+  @media(max-width:860px){ .proj-grid{grid-template-columns:1fr;} }
+  .proj-card{
+    background:var(--panel); border:1px solid var(--line); border-radius:var(--radius);
+    padding:26px; transition:transform .25s ease, border-color .25s ease, background .25s ease;
+  }
+  .proj-card:hover{transform:translateY(-5px); border-color:rgba(255,122,69,.4); background:var(--panel-2);}
+  .proj-card .idx{font-family:'JetBrains Mono',monospace; color:var(--accent); font-size:12px; margin-bottom:14px; letter-spacing:.05em;}
+  .proj-card h3{font-size:17.5px; margin:0 0 10px; font-weight:600;}
+  .proj-card p{color:var(--muted); font-size:14px; line-height:1.65; margin:0;}
+
+  /* certs / education / languages */
+  .flat-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:16px;}
+  @media(max-width:700px){ .flat-grid{grid-template-columns:1fr;} }
+  .cert{
+    display:flex; align-items:flex-start; gap:14px; padding:16px 18px; border:1px solid var(--line);
+    border-radius:12px; transition:border-color .2s, background .2s;
+  }
+  .cert:hover{border-color:rgba(255,122,69,.4); background:var(--panel);}
+  .cert .mark{
+    font-family:'JetBrains Mono',monospace; color:var(--accent); font-size:13px; margin-top:1px;
+  }
+  .cert .body b{display:block; font-size:14.5px; font-weight:600; margin-bottom:2px;}
+  .cert .body span{font-size:13px; color:var(--muted-2);}
+
+  .edu-row{
+    display:flex; justify-content:space-between; align-items:flex-start; gap:24px; flex-wrap:wrap;
+    padding:24px; border:1px solid var(--line); border-radius:var(--radius); margin-bottom:28px;
+  }
+  .edu-row h3{margin:0 0 4px; font-size:17px; font-weight:600;}
+  .edu-row p{margin:0; color:var(--muted); font-size:14px;}
+  .edu-row .gpa{font-family:'JetBrains Mono',monospace; color:var(--accent); font-size:15px; white-space:nowrap;}
+
+  .lang-pills{display:flex; gap:10px; flex-wrap:wrap;}
+  .lang-pill{
+    font-family:'JetBrains Mono',monospace; font-size:13px; padding:8px 16px; border-radius:999px;
+    border:1px solid var(--line); color:var(--muted);
+  }
+
+  /* footer / contact */
+  footer{padding:90px 0 60px; border-top:1px solid var(--line);}
+  .footer-inner{display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:36px;}
+  footer h2{font-size:clamp(26px,4vw,40px); margin:0 0 18px; max-width:520px; line-height:1.15;}
+  .contact-list{display:flex; flex-direction:column; gap:10px; font-size:14.5px; color:var(--muted);}
+  .contact-list a{text-decoration:none; transition:color .2s;}
+  .contact-list a:hover{color:var(--accent);}
+  .foot-meta{
+    display:flex; justify-content:space-between; margin-top:70px; padding-top:24px; border-top:1px solid var(--line);
+    font-size:12.5px; color:var(--muted-2); font-family:'JetBrains Mono',monospace; flex-wrap:wrap; gap:10px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    #trendline{animation:none; stroke-dashoffset:0;}
+    .chart-dot{animation:none; opacity:1;}
+    .tl-item.current .tl-dot{animation:none;}
+    .reveal{opacity:1; transform:none; transition:none;}
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <div class="brand">Purusothaman <span>S.</span></div>
+    <nav class="links nav-mobile-hide">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#credentials">Credentials</a>
+    </nav>
+    <a class="cta-btn" href="mailto:spurusoth30@gmail.com">Get in touch →</a>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- HERO -->
+  <section class="hero" style="border:none; padding-top:168px;">
+    <p class="eyebrow">Performance Marketing Specialist · Bangalore, India</p>
+    <h1>I turn ad spend into <em>pipeline</em>, across four countries.</h1>
+    <p class="lede">3+ years running Google Ads, Meta Ads, SEO and full‑funnel programs for B2B, fintech, branding, SaaS and real estate clients across India, the UK, the US and Ghana — optimizing for ROAS, not vanity metrics.</p>
+    <div class="hero-actions">
+      <a class="btn-primary" href="mailto:spurusoth30@gmail.com">Email me</a>
+      <a class="btn-ghost" href="#experience">See the track record</a>
+    </div>
+
+    <div class="chart-wrap" aria-hidden="true">
+      <svg viewBox="0 0 1000 150" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#FF7A45" stop-opacity="0.18"/>
+            <stop offset="100%" stop-color="#FF7A45" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <path d="M0,150 L0,120 C90,118 120,100 180,98 C260,95 300,60 380,55 C460,50 500,72 580,66 C660,60 700,20 800,22 C880,24 920,10 1000,8 L1000,150 Z" fill="url(#fade)"/>
+        <path id="trendline" d="M0,120 C90,118 120,100 180,98 C260,95 300,60 380,55 C460,50 500,72 580,66 C660,60 700,20 800,22 C880,24 920,10 1000,8"
+          fill="none" stroke="#FF7A45" stroke-width="2" stroke-linecap="round"/>
+        <circle class="chart-dot" cx="380" cy="55" r="3.5" fill="#FF7A45" style="animation-delay:1.2s"/>
+        <circle class="chart-dot" cx="800" cy="22" r="3.5" fill="#FF7A45" style="animation-delay:1.9s"/>
+        <circle class="chart-dot" cx="1000" cy="8" r="4.5" fill="#FF7A45" style="animation-delay:2.3s"/>
+      </svg>
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="num"><span class="accent">−</span><span data-count="28">0</span>%</div>
+        <div class="label">Cost per lead reduced through audience optimization</div>
+      </div>
+      <div class="stat">
+        <div class="num"><span data-count="14" data-decimal="1">0.0</span>→<span class="accent" data-count="36" data-decimal="1">0.0</span>%</div>
+        <div class="label">CTR lift from creative &amp; keyword testing</div>
+      </div>
+      <div class="stat">
+        <div class="num"><span class="accent">+</span><span data-count="40">0</span>%</div>
+        <div class="label">Qualified leads gained via landing‑page work</div>
+      </div>
+      <div class="stat">
+        <div class="num"><span data-count="4">0</span></div>
+        <div class="label">Markets served — India, UK, US, Ghana</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-head reveal">
+      <span class="tag">01 — About</span>
+      <h2>Full‑funnel, not just full‑spend.</h2>
+    </div>
+    <div class="about-grid">
+      <div class="reveal">
+        <p>I plan, launch and optimize paid campaigns end to end — audience segmentation, creative testing, landing pages, conversion tracking — then report back in numbers a client can act on: CTR, CPC, CPL, CPA, conversion rate, ROAS.</p>
+        <p>Recent work spans lead generation for real estate, FMCG, coffee, branding and B2B businesses, with campaigns run directly against India, UK, US and Ghana audiences.</p>
+        <p><strong style="color:var(--fg)">Languages:</strong> <span>English, Tamil, Telugu, Kannada</span></p>
+      </div>
+      <div class="reveal">
+        <div class="comp-group">
+          <h4>Paid Advertising</h4>
+          <div class="pills">
+            <span class="pill">Google Ads</span><span class="pill">Meta Ads</span>
+            <span class="pill">Campaign Budget Optimization</span><span class="pill">Search</span>
+            <span class="pill">Display</span><span class="pill">Remarketing</span>
+          </div>
+        </div>
+        <div class="comp-group">
+          <h4>Funnel &amp; CRO</h4>
+          <div class="pills">
+            <span class="pill">Funnel Strategy</span><span class="pill">A/B Testing</span>
+            <span class="pill">Landing Page Optimization</span><span class="pill">Audience Segmentation</span>
+          </div>
+        </div>
+        <div class="comp-group">
+          <h4>Analytics &amp; Tracking</h4>
+          <div class="pills">
+            <span class="pill">GA4</span><span class="pill">GTM</span><span class="pill">Meta Pixel</span>
+            <span class="pill">Conversion API</span><span class="pill">UTM Tracking</span><span class="pill">Looker Studio</span>
+          </div>
+        </div>
+        <div class="comp-group">
+          <h4>SEO</h4>
+          <div class="pills">
+            <span class="pill">Technical SEO</span><span class="pill">On‑Page</span>
+            <span class="pill">Keyword Research</span><span class="pill">Competitor Analysis</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="section-head reveal">
+      <span class="tag">02 — Experience</span>
+      <h2>Where the work happened.</h2>
+    </div>
+    <div class="timeline reveal">
+      <div class="tl-item current">
+        <div class="tl-dot"></div>
+        <div class="tl-date">2026 —</div>
+        <h3 class="tl-role">Performance Marketing Specialist</h3>
+        <p class="tl-co">Brimbus Branding</p>
+        <ul class="tl-bullets">
+          <li>Plan, execute and optimize Google Ads &amp; Meta Ads campaigns for multiple clients simultaneously.</li>
+          <li>Run lead‑gen campaigns for Real Estate, FMCG, Coffee, Branding and B2B businesses.</li>
+          <li>Manage Meta Pixel, Conversion API and Google conversion tracking end to end.</li>
+          <li>Track <span class="accent">CTR / CPC / CPL / CPA / ROAS</span> and report performance dashboards to management.</li>
+        </ul>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">Jul 2025 – Mar 2026</div>
+        <h3 class="tl-role">Marketing Lead</h3>
+        <p class="tl-co">Innercircle Softech Pvt Ltd</p>
+        <ul class="tl-bullets">
+          <li>Led digital strategy for fintech and B2B clients.</li>
+          <li>Reduced CPL by <span class="accent">28%</span> through audience optimization.</li>
+          <li>Improved CTR from <span class="accent">1.4% → 3.6%</span> via creative and keyword testing.</li>
+          <li>Increased qualified leads by <span class="accent">40%</span> through landing‑page improvements.</li>
+        </ul>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">Nov 2023 – Jan 2025</div>
+        <h3 class="tl-role">Digital Marketing Specialist</h3>
+        <p class="tl-co">Shelton Streets</p>
+        <ul class="tl-bullets">
+          <li>Planned SEO and digital marketing strategy for client websites.</li>
+          <li>Increased website traffic by <span class="accent">32%</span> through technical SEO and content work.</li>
+          <li>Managed LinkedIn, Facebook, Instagram and YouTube campaigns alongside design and content teams.</li>
+        </ul>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">Feb 2023 – Oct 2023</div>
+        <h3 class="tl-role">Digital Marketing Executive</h3>
+        <p class="tl-co">Webnexs Private Limited</p>
+        <ul class="tl-bullets">
+          <li>Managed SEO, social and content marketing activities.</li>
+          <li>Grew Instagram engagement by <span class="accent">48%</span> through content planning.</li>
+          <li>Generated <span class="accent">300+</span> organic leads through content‑driven marketing.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-head reveal">
+      <span class="tag">03 — Key Projects</span>
+      <h2>A few campaigns worth naming.</h2>
+    </div>
+    <div class="proj-grid reveal">
+      <div class="proj-card">
+        <div class="idx">INTL · REAL ESTATE</div>
+        <h3>Cross‑border real estate campaigns</h3>
+        <p>Meta Ads targeting UK, US and Ghana audiences — segmented and A/B tested for lead quality, not just lead volume.</p>
+      </div>
+      <div class="proj-card">
+        <div class="idx">D2C · COFFEE</div>
+        <h3>WeBrand Coffee</h3>
+        <p>Google Ads and Meta Ads planned from scratch, with lead‑generation funnels built and tuned through ongoing conversion tracking.</p>
+      </div>
+      <div class="proj-card">
+        <div class="idx">BRANDING · FMCG</div>
+        <h3>Branding &amp; FMCG lead‑gen</h3>
+        <p>Campaigns for branding agencies and FMCG businesses, improved through creative testing and landing‑page optimization.</p>
+      </div>
+      <div class="proj-card">
+        <div class="idx">FREELANCE · REAL ESTATE</div>
+        <h3>Ghar — Bengaluru</h3>
+        <p>Ran Meta lead‑generation campaigns for Ghar, a Bengaluru real estate business, on a freelance basis — targeting built around buyer intent, not just reach.</p>
+      </div>
+      <div class="proj-card">
+        <div class="idx">FREELANCE · EDUCATION FRANCHISE</div>
+        <h3>i2Global — Bengaluru</h3>
+        <p>Freelance lead generation for i2Global, a Bengaluru‑based education franchise, running parallel B2B and B2C funnels for two very different buying journeys.</p>
+      </div>
+      <div class="proj-card">
+        <div class="idx">FINTECH · B2B</div>
+        <h3>Innercircle Softech</h3>
+        <p>Led digital strategy across fintech and B2B accounts — cut CPL by 28% and lifted CTR from 1.4% to 3.6% through audience and creative testing.</p>
+      </div>
+      <div class="proj-card">
+        <div class="idx">SEO · CONTENT</div>
+        <h3>Webnexs</h3>
+        <p>SEO and content‑led social campaigns that grew Instagram engagement by 48% and generated 300+ organic leads.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CREDENTIALS -->
+  <section id="credentials">
+    <div class="section-head reveal">
+      <span class="tag">04 — Credentials</span>
+      <h2>Certifications &amp; education.</h2>
+    </div>
+
+    <div class="flat-grid reveal" style="margin-bottom:44px;">
+      <div class="cert"><span class="mark">✓</span><div class="body"><b>Google Analytics 4 (GA4)</b><span>Certification</span></div></div>
+      <div class="cert"><span class="mark">✓</span><div class="body"><b>SEO &amp; AI Search Strategy</b><span>Semrush</span></div></div>
+      <div class="cert"><span class="mark">✓</span><div class="body"><b>AI‑Powered Marketing</b><span>Semrush</span></div></div>
+      <div class="cert"><span class="mark">✓</span><div class="body"><b>Influencer Marketing Strategy</b><span>Semrush</span></div></div>
+    </div>
+
+    <div class="edu-row reveal">
+      <div>
+        <h3>Bachelor of Engineering — Mechanical Engineering</h3>
+        <p>Dhirajlal Gandhi College of Technology, Salem</p>
+      </div>
+      <div class="gpa">CGPA 7.9</div>
+    </div>
+
+    <div class="reveal">
+      <div class="comp-group" style="margin-bottom:0;">
+        <h4>Tools</h4>
+        <div class="pills">
+          <span class="pill">Google Ads</span><span class="pill">Meta Business Suite</span>
+          <span class="pill">GA4</span><span class="pill">GTM</span><span class="pill">SEMrush</span>
+          <span class="pill">Ahrefs</span><span class="pill">Looker Studio</span><span class="pill">Excel</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-inner reveal">
+      <div>
+        <span class="eyebrow" style="margin-bottom:14px;">Let's talk</span>
+        <h2>Have a campaign that needs better numbers?</h2>
+      </div>
+      <div class="contact-list">
+        <a href="mailto:spurusoth30@gmail.com">spurusoth30@gmail.com</a>
+        <a href="tel:+917867880495">+91 78678 80495</a>
+        <span>Bangalore, Karnataka, India</span>
+      </div>
+    </div>
+    <div class="foot-meta">
+      <span>© <span id="year"></span> Purusothaman Shanmugam</span>
+      <span>Built for performance, not just for looks.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, {threshold:0.15});
+  revealEls.forEach(el=>io.observe(el));
+
+  // counting stats
+  const counters = document.querySelectorAll('[data-count]');
+  const statsBlock = document.querySelector('.stats');
+  let counted = false;
+  function runCounters(){
+    if(counted) return;
+    counted = true;
+    counters.forEach(el=>{
+      const target = parseFloat(el.getAttribute('data-count'));
+      const decimals = parseInt(el.getAttribute('data-decimal') || "0");
+      const dur = 1400;
+      const start = performance.now();
+      function tick(now){
+        const p = Math.min((now-start)/dur, 1);
+        const eased = 1 - Math.pow(1-p, 3);
+        const val = target * eased;
+        el.textContent = decimals ? val.toFixed(decimals) : Math.round(val);
+        if(p < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    });
+  }
+  if(statsBlock){
+    const statIo = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ runCounters(); statIo.disconnect(); } });
+    }, {threshold:0.4});
+    statIo.observe(statsBlock);
+  }
+
+  // reduced motion: fire immediately
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    revealEls.forEach(el=>el.classList.add('in'));
+    runCounters();
+  }
+</script>
+
+</body>
+</html>
