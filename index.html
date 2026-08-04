@@ -17,10 +17,11 @@
     --fg:#14171F;
     --muted:#5B6270;
     --muted-2:#8A8F9C;
-    --accent:#FF7A45;
-    --accent-soft:rgba(255,122,69,.12);
+    --accent:#8B5CF6;
+    --accent-2:#22D3EE;
+    --accent-soft:rgba(139,92,246,.12);
     --btn-text:#0A0C11;
-    --code-kw:#FF7A45;
+    --code-kw:#FF7AD9;
     --code-str:#8FD6A8;
     --code-prop:#7FC4FF;
     --code-com:#5A6274;
@@ -42,9 +43,23 @@
   body::before{
     content:""; position:fixed; inset:0;
     background-image:
-      radial-gradient(circle at 10% 6%, rgba(255,122,69,.06), transparent 40%),
-      radial-gradient(circle at 90% 0%, rgba(127,196,255,.04), transparent 35%);
+      radial-gradient(circle, rgba(139,92,246,.09), transparent 40%),
+      radial-gradient(circle, rgba(139,92,246,.04), transparent 35%);
+    background-repeat:no-repeat;
+    background-size:55% 55%, 50% 50%;
+    background-position:10% 6%, 90% 0%;
+    animation:driftBg 24s ease-in-out infinite alternate;
     pointer-events:none; z-index:0;
+  }
+  @keyframes driftBg{
+    0%{background-position:10% 6%, 90% 0%;}
+    50%{background-position:18% 16%, 82% 12%;}
+    100%{background-position:10% 6%, 90% 0%;}
+  }
+
+  #scroll-progress{
+    position:fixed; top:0; left:0; height:3px; width:0%; z-index:60;
+    background-image:linear-gradient(90deg, var(--accent), var(--accent-2));
   }
 
   .wrap{max-width:var(--maxw); margin:0 auto; padding:0 28px; position:relative; z-index:1;}
@@ -68,20 +83,31 @@
   nav.links a:hover::after{width:100%;}
   .cta-btn{
     font-family:'JetBrains Mono',monospace; font-size:12.5px; text-decoration:none;
-    color:var(--btn-text); background:var(--accent); padding:9px 16px; border-radius:999px;
-    letter-spacing:.02em; transition:transform .2s ease, box-shadow .2s ease; white-space:nowrap;
+    color:var(--btn-text); background-image:linear-gradient(120deg, var(--accent) 0%, var(--accent-2) 50%, var(--accent) 100%);
+    background-size:220% auto; background-position:0% 50%; padding:9px 16px; border-radius:999px;
+    letter-spacing:.02em; transition:transform .2s ease, box-shadow .2s ease, background-position .6s ease; white-space:nowrap;
   }
-  .cta-btn:hover{transform:translateY(-2px); box-shadow:0 8px 24px -8px rgba(255,122,69,.6);}
+  .cta-btn:hover{transform:translateY(-2px); box-shadow:0 8px 24px -8px rgba(139,92,246,.6); background-position:100% 50%;}
   .nav-mobile-hide{display:flex;}
   @media(max-width:760px){ .nav-mobile-hide{display:none;} }
 
   /* HERO */
   .hero{padding:168px 0 60px;}
+  @keyframes heroFadeUp{to{opacity:1; transform:translateY(0);}}
+  .hero .eyebrow, .hero h1, .hero p.lede, .hero .hero-actions, .hero .code-card{
+    opacity:0; transform:translateY(18px); animation:heroFadeUp .8s ease forwards;
+  }
+  .hero .eyebrow{animation-delay:.05s;}
+  .hero h1{animation-delay:.16s;}
+  .hero p.lede{animation-delay:.3s;}
+  .hero .hero-actions{animation-delay:.42s;}
+  .hero .code-card{animation-delay:.54s;}
   .eyebrow{
     font-family:'JetBrains Mono',monospace; font-size:12.5px; text-transform:uppercase; letter-spacing:.14em;
     color:var(--accent); display:flex; align-items:center; gap:10px; margin-bottom:22px;
   }
-  .eyebrow::before{content:""; width:8px; height:8px; border-radius:50%; background:var(--accent); box-shadow:0 0 0 4px var(--accent-soft);}
+  .eyebrow::before{content:""; width:8px; height:8px; border-radius:50%; background:var(--accent); box-shadow:0 0 0 4px var(--accent-soft); animation:eyebrowPulse 2.6s ease-in-out infinite;}
+  @keyframes eyebrowPulse{0%,100%{box-shadow:0 0 0 4px var(--accent-soft);} 50%{box-shadow:0 0 0 7px transparent;}}
   .hero-grid{display:grid; grid-template-columns:1.05fr .95fr; gap:52px; align-items:start;}
   @media(max-width:900px){ .hero-grid{grid-template-columns:1fr;} }
   .hero h1{font-size:clamp(32px,5.4vw,52px); line-height:1.08; font-weight:700; margin:0 0 20px; letter-spacing:-.01em;}
@@ -89,10 +115,12 @@
   .hero p.lede{font-size:16.5px; color:var(--muted); max-width:520px; line-height:1.7; margin:0 0 32px;}
   .hero-actions{display:flex; gap:14px; flex-wrap:wrap;}
   .btn-primary{
-    background:var(--accent); color:var(--btn-text); text-decoration:none; padding:13px 24px;
-    border-radius:10px; font-weight:600; font-size:14.5px; transition:transform .2s, box-shadow .2s;
+    background-image:linear-gradient(120deg, var(--accent) 0%, var(--accent-2) 50%, var(--accent) 100%);
+    background-size:220% auto; background-position:0% 50%;
+    color:var(--btn-text); text-decoration:none; padding:13px 24px;
+    border-radius:10px; font-weight:600; font-size:14.5px; transition:transform .2s, box-shadow .2s, background-position .6s ease;
   }
-  .btn-primary:hover{transform:translateY(-2px); box-shadow:0 10px 28px -10px rgba(255,122,69,.55);}
+  .btn-primary:hover{transform:translateY(-2px); box-shadow:0 10px 28px -10px rgba(139,92,246,.55); background-position:100% 50%;}
   .btn-ghost{
     border:1px solid var(--line); color:var(--fg); text-decoration:none; padding:13px 24px;
     border-radius:10px; font-weight:500; font-size:14.5px; transition:border-color .2s, background .2s;
@@ -138,6 +166,10 @@
 
   .reveal{opacity:0; transform:translateY(22px); transition:opacity .7s ease, transform .7s ease;}
   .reveal.in{opacity:1; transform:translateY(0);}
+  .proj-grid .reveal:nth-child(3n+1), .tech-grid .reveal:nth-child(4n+1), .services-grid .reveal:nth-child(3n+1){transition-delay:0s;}
+  .proj-grid .reveal:nth-child(3n+2), .tech-grid .reveal:nth-child(4n+2), .services-grid .reveal:nth-child(3n+2){transition-delay:.08s;}
+  .proj-grid .reveal:nth-child(3n+3), .tech-grid .reveal:nth-child(4n+3), .services-grid .reveal:nth-child(3n+3){transition-delay:.16s;}
+  .tech-grid .reveal:nth-child(4n+4){transition-delay:.24s;}
 
   /* ABOUT */
   .about-grid{display:grid; grid-template-columns:.85fr 1.15fr; gap:56px;}
@@ -147,7 +179,8 @@
     border-radius:18px; overflow:hidden; border:1px solid var(--line); aspect-ratio:4/5;
     background:var(--panel);
   }
-  .photo-frame img{width:100%; height:100%; object-fit:cover; object-position:center 20%;}
+  .photo-frame img{width:100%; height:100%; object-fit:cover; object-position:center 20%; transition:transform .6s ease;}
+  .photo-frame:hover img{transform:scale(1.06);}
   .loc-badge{
     position:absolute; left:16px; bottom:-16px; background:var(--panel-2); border:1px solid var(--line);
     padding:9px 16px; border-radius:999px; font-size:12.5px; color:var(--fg); display:flex; align-items:center; gap:8px;
@@ -174,7 +207,7 @@
     border:1px solid var(--line); border-radius:12px; padding:18px 16px; text-align:center;
     background:var(--panel); transition:transform .2s ease, border-color .2s ease;
   }
-  .tech-card:hover{transform:translateY(-4px); border-color:rgba(255,122,69,.4);}
+  .tech-card:hover{transform:translateY(-4px); border-color:rgba(139,92,246,.4);}
   .tech-card .tname{font-size:13.5px; font-weight:500;}
   .tech-card .tcat{font-size:11px; color:var(--muted-2); margin-top:4px; font-family:'JetBrains Mono',monospace;}
 
@@ -195,7 +228,7 @@
     scroll-snap-align:start; flex:0 0 250px; border:1px solid var(--line); border-radius:12px;
     padding:22px 20px; background:var(--panel); transition:transform .2s ease, border-color .2s ease, background .2s ease;
   }
-  .service-card:hover{transform:translateY(-4px); border-color:rgba(255,122,69,.4); background:var(--panel-2);}
+  .service-card:hover{transform:translateY(-4px); border-color:rgba(139,92,246,.4); background:var(--panel-2);}
   .service-card .sidx{font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--accent); margin-bottom:12px; letter-spacing:.04em;}
   .service-card h3{font-size:15px; margin:0 0 8px; font-weight:600;}
   .service-card p{font-size:13px; color:var(--muted); line-height:1.65; margin:0;}
@@ -208,24 +241,27 @@
     position:relative; width:100%; height:100%; text-align:left;
     transition:transform .65s cubic-bezier(.4,.15,.2,1); transform-style:preserve-3d;
   }
-  .flip-card.flipped .flip-inner{transform:rotateY(180deg);}
+  .flip-card.flipped .flip-inner, .flip-card:hover .flip-inner{transform:rotateY(180deg);}
   .flip-front, .flip-back{
     position:absolute; inset:0; -webkit-backface-visibility:hidden; backface-visibility:hidden;
     border:1px solid var(--line); border-radius:12px; padding:22px 20px; background:var(--panel);
     display:flex; flex-direction:column;
   }
-  .flip-card:hover .flip-front{border-color:rgba(255,122,69,.4);}
+  .flip-card:hover .flip-front{border-color:rgba(139,92,246,.4);}
   .flip-front{justify-content:space-between;}
   .flip-icon{
     width:42px; height:42px; border-radius:11px; background:var(--accent-soft); border:1px solid var(--line);
     display:flex; align-items:center; justify-content:center; color:var(--accent);
+    transition:transform .35s ease, background .35s ease;
   }
+  .flip-card:hover .flip-icon{transform:scale(1.08) rotate(-6deg); background:var(--accent);}
+  .flip-card:hover .flip-icon svg{stroke:var(--bg);}
   .flip-icon svg{width:20px; height:20px;}
   .flip-front h3{font-size:15.5px; margin:0; font-weight:600;}
   .flip-hint{font-family:'JetBrains Mono',monospace; font-size:10.5px; color:var(--muted-2); letter-spacing:.04em;}
   .flip-back{
     transform:rotateY(180deg); background:var(--panel-2); justify-content:center;
-    border-color:rgba(255,122,69,.35);
+    border-color:rgba(139,92,246,.35);
   }
   .flip-back .sidx{font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--accent); margin-bottom:10px;}
   .flip-back p{font-size:13px; color:var(--muted); line-height:1.65; margin:0;}
@@ -250,7 +286,7 @@
   .proj-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
   @media(max-width:860px){ .proj-grid{grid-template-columns:1fr;} }
   .proj-card{background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); padding:26px; transition:transform .25s ease, border-color .25s ease, background .25s ease;}
-  .proj-card:hover{transform:translateY(-5px); border-color:rgba(255,122,69,.4); background:var(--panel-2);}
+  .proj-card:hover{transform:translateY(-5px); border-color:rgba(139,92,246,.4); background:var(--panel-2);}
   .proj-card .idx{font-family:'JetBrains Mono',monospace; color:var(--accent); font-size:12px; margin-bottom:14px; letter-spacing:.05em;}
   .proj-card h3{font-size:17.5px; margin:0 0 10px; font-weight:600;}
   .proj-card p{color:var(--muted); font-size:14px; line-height:1.65; margin:0;}
@@ -259,7 +295,7 @@
   .flat-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:16px;}
   @media(max-width:700px){ .flat-grid{grid-template-columns:1fr;} }
   .cert{display:flex; align-items:flex-start; gap:14px; padding:16px 18px; border:1px solid var(--line); border-radius:12px; transition:border-color .2s, background .2s;}
-  .cert:hover{border-color:rgba(255,122,69,.4); background:var(--panel);}
+  .cert:hover{border-color:rgba(139,92,246,.4); background:var(--panel);}
   .cert .mark{font-family:'JetBrains Mono',monospace; color:var(--accent); font-size:13px; margin-top:1px;}
   .cert .body b{display:block; font-size:14.5px; font-weight:600; margin-bottom:2px;}
   .cert .body span{font-size:13px; color:var(--muted-2);}
@@ -302,10 +338,12 @@
   .contact-form textarea{resize:vertical; min-height:120px;}
   .contact-form button{
     align-self:flex-start; border:none; cursor:pointer;
-    background:var(--accent); color:var(--btn-text); font-weight:600; font-size:14.5px;
-    padding:13px 26px; border-radius:10px; transition:transform .2s, box-shadow .2s; font-family:'Inter',sans-serif;
+    background-image:linear-gradient(120deg, var(--accent) 0%, var(--accent-2) 50%, var(--accent) 100%);
+    background-size:220% auto; background-position:0% 50%;
+    color:var(--btn-text); font-weight:600; font-size:14.5px;
+    padding:13px 26px; border-radius:10px; transition:transform .2s, box-shadow .2s, background-position .6s ease; font-family:'Inter',sans-serif;
   }
-  .contact-form button:hover{transform:translateY(-2px); box-shadow:0 10px 28px -10px rgba(255,122,69,.55);}
+  .contact-form button:hover{transform:translateY(-2px); box-shadow:0 10px 28px -10px rgba(139,92,246,.55); background-position:100% 50%;}
   .form-note{font-size:12px; color:var(--muted-2); margin-top:-4px;}
 
   /* footer */
@@ -319,11 +357,15 @@
   @media (prefers-reduced-motion: reduce){
     html{scroll-behavior:auto;}
     .tl-item.current .tl-dot{animation:none;}
+    .eyebrow::before{animation:none;}
+    body::before{animation:none;}
+    .hero .eyebrow, .hero h1, .hero p.lede, .hero .hero-actions, .hero .code-card{animation:none; opacity:1; transform:none;}
     .reveal{opacity:1; transform:none; transition:none;}
   }
 </style>
 </head>
 <body>
+<div id="scroll-progress"></div>
 
 <header class="nav">
   <div class="nav-inner">
@@ -444,14 +486,14 @@
       <h2>What I Do</h2>
     </div>
     <p class="section-sub reveal">Where I plug in on a campaign, end to end.</p>
-    <p class="scroll-hint reveal">tap a card to see what's included →</p>
-    <div class="services-grid reveal">
+    <p class="scroll-hint reveal">hover a card to see what's included →</p>
+    <div class="services-grid">
 
-      <div class="flip-card" tabindex="0" role="button" aria-label="Google & Meta Ads Management — tap for details">
+      <div class="flip-card reveal" tabindex="0" role="button" aria-label="Google & Meta Ads Management — hover for details">
         <div class="flip-inner">
           <div class="flip-front">
             <div class="flip-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4.2"/><circle cx="12" cy="12" r="0.6" fill="currentColor"/></svg></div>
-            <div><h3>Google &amp; Meta Ads Management</h3><div class="flip-hint">tap for details</div></div>
+            <div><h3>Google &amp; Meta Ads Management</h3><div class="flip-hint">hover for details</div></div>
           </div>
           <div class="flip-back">
             <div class="sidx">01</div>
@@ -460,11 +502,11 @@
         </div>
       </div>
 
-      <div class="flip-card" tabindex="0" role="button" aria-label="Landing Pages & CRO — tap for details">
+      <div class="flip-card reveal" tabindex="0" role="button" aria-label="Landing Pages & CRO — hover for details">
         <div class="flip-inner">
           <div class="flip-front">
             <div class="flip-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="5" rx="1"/><rect x="3" y="12" width="8" height="8" rx="1"/><rect x="13" y="12" width="8" height="8" rx="1"/></svg></div>
-            <div><h3>Landing Pages &amp; CRO</h3><div class="flip-hint">tap for details</div></div>
+            <div><h3>Landing Pages &amp; CRO</h3><div class="flip-hint">hover for details</div></div>
           </div>
           <div class="flip-back">
             <div class="sidx">02</div>
@@ -473,11 +515,11 @@
         </div>
       </div>
 
-      <div class="flip-card" tabindex="0" role="button" aria-label="Analytics & Tracking Setup — tap for details">
+      <div class="flip-card reveal" tabindex="0" role="button" aria-label="Analytics & Tracking Setup — hover for details">
         <div class="flip-inner">
           <div class="flip-front">
             <div class="flip-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M12 20V4M20 20v-7"/></svg></div>
-            <div><h3>Analytics &amp; Tracking Setup</h3><div class="flip-hint">tap for details</div></div>
+            <div><h3>Analytics &amp; Tracking Setup</h3><div class="flip-hint">hover for details</div></div>
           </div>
           <div class="flip-back">
             <div class="sidx">03</div>
@@ -486,11 +528,11 @@
         </div>
       </div>
 
-      <div class="flip-card" tabindex="0" role="button" aria-label="SEO — tap for details">
+      <div class="flip-card reveal" tabindex="0" role="button" aria-label="SEO — hover for details">
         <div class="flip-inner">
           <div class="flip-front">
             <div class="flip-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="6"/><path d="M20 20l-5.2-5.2"/></svg></div>
-            <div><h3>SEO</h3><div class="flip-hint">tap for details</div></div>
+            <div><h3>SEO</h3><div class="flip-hint">hover for details</div></div>
           </div>
           <div class="flip-back">
             <div class="sidx">04</div>
@@ -499,11 +541,11 @@
         </div>
       </div>
 
-      <div class="flip-card" tabindex="0" role="button" aria-label="Audience & Funnel Strategy — tap for details">
+      <div class="flip-card reveal" tabindex="0" role="button" aria-label="Audience & Funnel Strategy — hover for details">
         <div class="flip-inner">
           <div class="flip-front">
             <div class="flip-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16l-6.2 7.8v6.2l-3.6 1.8v-8L4 4z"/></svg></div>
-            <div><h3>Audience &amp; Funnel Strategy</h3><div class="flip-hint">tap for details</div></div>
+            <div><h3>Audience &amp; Funnel Strategy</h3><div class="flip-hint">hover for details</div></div>
           </div>
           <div class="flip-back">
             <div class="sidx">05</div>
@@ -512,11 +554,11 @@
         </div>
       </div>
 
-      <div class="flip-card" tabindex="0" role="button" aria-label="Reporting & Dashboards — tap for details">
+      <div class="flip-card reveal" tabindex="0" role="button" aria-label="Reporting & Dashboards — hover for details">
         <div class="flip-inner">
           <div class="flip-front">
             <div class="flip-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div>
-            <div><h3>Reporting &amp; Dashboards</h3><div class="flip-hint">tap for details</div></div>
+            <div><h3>Reporting &amp; Dashboards</h3><div class="flip-hint">hover for details</div></div>
           </div>
           <div class="flip-back">
             <div class="sidx">06</div>
@@ -534,19 +576,19 @@
       <h2>Tech Stack</h2>
     </div>
     <p class="section-sub reveal">Platforms and tools I use to plan, run and report on campaigns.</p>
-    <div class="tech-grid reveal">
-      <div class="tech-card"><div class="tname">Google Ads</div><div class="tcat">Paid Search</div></div>
-      <div class="tech-card"><div class="tname">Meta Ads</div><div class="tcat">Paid Social</div></div>
-      <div class="tech-card"><div class="tname">GA4</div><div class="tcat">Analytics</div></div>
-      <div class="tech-card"><div class="tname">Google Tag Manager</div><div class="tcat">Tracking</div></div>
-      <div class="tech-card"><div class="tname">Meta Pixel</div><div class="tcat">Tracking</div></div>
-      <div class="tech-card"><div class="tname">Conversion API</div><div class="tcat">Tracking</div></div>
-      <div class="tech-card"><div class="tname">SEMrush</div><div class="tcat">SEO</div></div>
-      <div class="tech-card"><div class="tname">Ahrefs</div><div class="tcat">SEO</div></div>
-      <div class="tech-card"><div class="tname">Looker Studio</div><div class="tcat">Reporting</div></div>
-      <div class="tech-card"><div class="tname">Google Search Console</div><div class="tcat">SEO</div></div>
-      <div class="tech-card"><div class="tname">Microsoft Excel</div><div class="tcat">Reporting</div></div>
-      <div class="tech-card"><div class="tname">Meta Business Suite</div><div class="tcat">Paid Social</div></div>
+    <div class="tech-grid">
+      <div class="tech-card reveal"><div class="tname">Google Ads</div><div class="tcat">Paid Search</div></div>
+      <div class="tech-card reveal"><div class="tname">Meta Ads</div><div class="tcat">Paid Social</div></div>
+      <div class="tech-card reveal"><div class="tname">GA4</div><div class="tcat">Analytics</div></div>
+      <div class="tech-card reveal"><div class="tname">Google Tag Manager</div><div class="tcat">Tracking</div></div>
+      <div class="tech-card reveal"><div class="tname">Meta Pixel</div><div class="tcat">Tracking</div></div>
+      <div class="tech-card reveal"><div class="tname">Conversion API</div><div class="tcat">Tracking</div></div>
+      <div class="tech-card reveal"><div class="tname">SEMrush</div><div class="tcat">SEO</div></div>
+      <div class="tech-card reveal"><div class="tname">Ahrefs</div><div class="tcat">SEO</div></div>
+      <div class="tech-card reveal"><div class="tname">Looker Studio</div><div class="tcat">Reporting</div></div>
+      <div class="tech-card reveal"><div class="tname">Google Search Console</div><div class="tcat">SEO</div></div>
+      <div class="tech-card reveal"><div class="tname">Microsoft Excel</div><div class="tcat">Reporting</div></div>
+      <div class="tech-card reveal"><div class="tname">Meta Business Suite</div><div class="tcat">Paid Social</div></div>
     </div>
     <div class="reveal" style="margin-top:32px;">
       <div class="comp-group" style="margin-bottom:0;">
@@ -623,38 +665,38 @@
       <span class="tag">05 — Key Projects</span>
       <h2>A few campaigns worth naming</h2>
     </div>
-    <div class="proj-grid reveal">
-      <div class="proj-card">
+    <div class="proj-grid">
+      <div class="proj-card reveal">
         <div class="idx">INTL · REAL ESTATE</div>
         <h3>Cross‑border real estate campaigns</h3>
         <p>Meta Ads targeting UK, US and Ghana audiences — segmented and A/B tested for lead quality, not just lead volume.</p>
       </div>
-      <div class="proj-card">
+      <div class="proj-card reveal">
         <div class="idx">D2C · COFFEE</div>
         <h3>WeBrand Coffee</h3>
         <p>Google Ads and Meta Ads planned from scratch, with lead‑generation funnels built and tuned through ongoing conversion tracking.</p>
       </div>
-      <div class="proj-card">
+      <div class="proj-card reveal">
         <div class="idx">BRANDING · FMCG</div>
         <h3>Branding &amp; FMCG lead‑gen</h3>
         <p>Campaigns for branding agencies and FMCG businesses, improved through creative testing and landing‑page optimization.</p>
       </div>
-      <div class="proj-card">
+      <div class="proj-card reveal">
         <div class="idx">FREELANCE · REAL ESTATE</div>
         <h3>Ghar — Bengaluru</h3>
         <p>Ran Meta lead‑generation campaigns for Ghar, a Bengaluru real estate business, on a freelance basis — targeting built around buyer intent, not just reach.</p>
       </div>
-      <div class="proj-card">
+      <div class="proj-card reveal">
         <div class="idx">FREELANCE · EDUCATION FRANCHISE</div>
         <h3>i2Global — Bengaluru</h3>
         <p>Freelance lead generation for i2Global, a Bengaluru‑based education franchise, running parallel B2B and B2C funnels for two very different buying journeys.</p>
       </div>
-      <div class="proj-card">
+      <div class="proj-card reveal">
         <div class="idx">FINTECH · B2B</div>
         <h3>Innercircle Softech</h3>
         <p>Led digital strategy across fintech and B2B accounts — cut CPL by 28% and lifted CTR from 1.4% to 3.6% through audience and creative testing.</p>
       </div>
-      <div class="proj-card">
+      <div class="proj-card reveal">
         <div class="idx">SEO · CONTENT</div>
         <h3>Webnexs</h3>
         <p>SEO and content‑led social campaigns that grew Instagram engagement by 48% and generated 300+ organic leads.</p>
@@ -669,9 +711,9 @@
       <h2>Sample Deliverables</h2>
     </div>
     <p class="section-sub reveal">Illustrative examples of the kind of reporting, creative and funnel work I build for clients — not live client data.</p>
-    <div class="proj-grid reveal">
+    <div class="proj-grid">
 
-      <div class="proj-card" style="padding:22px;">
+      <div class="proj-card reveal" style="padding:22px;">
         <div class="idx">SAMPLE · PERFORMANCE REPORT</div>
         <svg viewBox="0 0 300 130" style="width:100%; height:auto; margin-bottom:16px;">
           <line x1="0" y1="110" x2="300" y2="110" stroke="var(--line)" stroke-width="1"/>
@@ -687,7 +729,7 @@
         <p>A Looker Studio‑style readout tracking spend, CPL and ROAS week over week, built for a client's Monday review.</p>
       </div>
 
-      <div class="proj-card" style="padding:22px;">
+      <div class="proj-card reveal" style="padding:22px;">
         <div class="idx">SAMPLE · FUNNEL MAP</div>
         <svg viewBox="0 0 300 130" style="width:100%; height:auto; margin-bottom:16px;">
           <polygon points="20,15 280,15 235,55 65,55" fill="var(--panel-2)" stroke="var(--line)"/>
@@ -812,6 +854,16 @@
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  // scroll progress bar
+  const progressBar = document.getElementById('scroll-progress');
+  function updateProgress(){
+    const h = document.documentElement;
+    const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+    progressBar.style.width = scrolled + '%';
+  }
+  window.addEventListener('scroll', updateProgress);
+  updateProgress();
 
   const revealEls = document.querySelectorAll('.reveal');
   const io = new IntersectionObserver((entries)=>{
